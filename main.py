@@ -1,5 +1,4 @@
 import asyncio
-
 from aiogram import Bot, Dispatcher
 
 from config import BOT_TOKEN
@@ -11,7 +10,7 @@ dp = Dispatcher()
 dp.include_router(router)
 
 async def main():
-    print("🚀 HSC Batch 2026 Bot Started...")
+    print("🚀 Bot Started...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
