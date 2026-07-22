@@ -93,27 +93,21 @@ async def menu(message: Message):
             "📸 আপনার Payment Screenshot পাঠান।"
         )
 
-    elif message.photo:
+    @router.message(F.photo)
+async def payment_photo(message: Message):
 
     await bot.send_photo(
         chat_id=ADMIN_ID,
         photo=message.photo[-1].file_id,
         caption=f"""
-💳 নতুন Payment
+💳 নতুন Payment Screenshot
 
-👤 {message.from_user.full_name}
-🆔 {message.from_user.id}
-@{message.from_user.username}
+👤 Name: {message.from_user.full_name}
+🆔 ID: {message.from_user.id}
+📛 Username: @{message.from_user.username}
 """
     )
 
     await message.answer(
-        "✅ আপনার Screenshot সফলভাবে জমা হয়েছে।"
+        "✅ আপনার Screenshot সফলভাবে জমা হয়েছে।\n\nAdmin খুব শীঘ্রই Verify করবে।"
     )
-
-    else:
-
-        await message.answer(
-            "❌ নিচের Menu ব্যবহার করুন।"
-            
-        )
