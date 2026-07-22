@@ -1,3 +1,8 @@
+from config import ADMIN_ID
+from aiogram import Bot
+from config import BOT_TOKEN
+
+bot = Bot(BOT_TOKEN)
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
@@ -90,12 +95,25 @@ async def menu(message: Message):
 
     elif message.photo:
 
-        await message.answer(
-            "✅ Screenshot Received.\nAdmin খুব দ্রুত Verify করবে।"
-        )
+    await bot.send_photo(
+        chat_id=ADMIN_ID,
+        photo=message.photo[-1].file_id,
+        caption=f"""
+💳 নতুন Payment
+
+👤 {message.from_user.full_name}
+🆔 {message.from_user.id}
+@{message.from_user.username}
+"""
+    )
+
+    await message.answer(
+        "✅ আপনার Screenshot সফলভাবে জমা হয়েছে।"
+    )
 
     else:
 
         await message.answer(
             "❌ নিচের Menu ব্যবহার করুন।"
+            
         )
